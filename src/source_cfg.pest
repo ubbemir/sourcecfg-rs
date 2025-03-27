@@ -1,0 +1,29 @@
+WHITESPACE			= _{ " " | "\t" }
+WS_N				= _{ WHITESPACE | NEWLINE }
+COMMENT				= ${ SingleLineComment }
+SingleLineComment 	= { "//" ~ (!"\n" ~ ANY)* }
+
+cvar_part	= @{ (ASCII_ALPHA_LOWER | ASCII_DIGIT )+ }
+cvar		= @{("+" | "-")? ~ cvar_part ~ ("_" ~ cvar_part)* }
+
+param = @{ bool | number | cvar | string }
+
+bool	= @{ "true" | "false" }
+int		= @{ ("+" | "-")? ~ ASCII_DIGIT+ }
+float	= @{ int ~ "." ~ ASCII_DIGIT+ }
+number	= @{ float | int }
+
+raw_string	= @{ (!("\\" | "\"" | "\n") ~ ANY)+ }
+predefined	= @{ "\\" |  "\"" }
+escape		= @{ "\\" ~ predefined }
+string 		= @{ "\"" ~ (raw_string | escape)* ~ "\"" }
+
+
+
+// HIGHER LEVEL
+statement	= { cvar ~ param* ~ COMMENT? }
+stmt_delim	= _{ ";" | NEWLINE }
+statements	= { statement ~ (stmt_delim+ ~ statement)* }
+
+
+config	= { WS_N* ~ statements? ~ WS_N* }
