@@ -4,6 +4,7 @@ use crate::error::Error;
 
 pub fn traverse(input: &str) -> Result<String, Error> {
     let file = crate::parse(input)?;
+    let mut result = String::new();
 
     for line in file.into_inner() {
         match line.as_rule() {
@@ -18,16 +19,16 @@ pub fn traverse(input: &str) -> Result<String, Error> {
                             for param in params {
                                 match param.as_rule() {
                                     Rule::cvar => {
-                                        print!("{}", param.as_str())
+                                        result.push_str(param.as_str());
                                     },
                                     Rule::param => {
-                                        print!("{}", param.as_str())
+                                        result.push_str(param.as_str());
                                     },
                                     _ => ()
                                 }
-                                print!(" ");
+                                result.push_str(" ");
                             }
-                            println!("")
+                            result.push_str("\n");
                         },
                         _ => ()
                     }
@@ -37,5 +38,5 @@ pub fn traverse(input: &str) -> Result<String, Error> {
         }
     }
 
-    todo!()
+    Ok(result)
 }
