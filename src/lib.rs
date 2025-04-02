@@ -1,5 +1,6 @@
 pub mod error;
 pub mod formatters;
+pub mod lang;
 
 use crate::error::Error as CrateErr;
 use pest::Parser;
