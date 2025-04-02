@@ -20,14 +20,16 @@ pub fn traverse(input: &str) -> Result<String, Error> {
                                 match param.as_rule() {
                                     Rule::cvar => {
                                         result.push_str(param.as_str());
+                                        result.push_str(" ");
                                     },
                                     Rule::param => {
                                         result.push_str(param.as_str());
+                                        result.push_str(" ");
                                     },
                                     _ => ()
                                 }
-                                result.push_str(" ");
                             }
+                            result.pop();
                             result.push_str("\n");
                         },
                         _ => ()
