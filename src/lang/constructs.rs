@@ -16,7 +16,8 @@ pub fn parse_config(cfg: Pair<'_, Rule>) -> Config {
 
     let stmts_res = match stmts.as_rule() {
         Rule::statements => {
-            stmts.into_inner().filter(|line| if let Rule::statement = line.as_rule() { true } else { false }).map(|stmt| parse_statement(stmt)).collect()
+            let filtered = stmts.into_inner().filter(|line| if let Rule::statement = line.as_rule() { true } else { false });
+            filtered.map(|stmt| parse_statement(stmt)).collect()
         },
         _ => Vec::new()
     };
