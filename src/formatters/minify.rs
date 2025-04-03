@@ -2,12 +2,15 @@ use itertools::Itertools;
 
 use crate::lang::constructs::Config;
 use crate::parser::Parseable;
-use crate::Result;
+use crate::{Result, Error};
 
 
 pub fn minify(input: &str) -> Result<String> {
     let file = crate::parser::parse(input)?;
-    let cfg = Config::parse(file);
+    let cfg = match Config::parse(file) {
+        Some(e) => e,
+        None => return Err(Error::ParsingError("Invalid config".to_string()))
+    };
 
     Ok(Itertools::intersperse(cfg.statements.iter().map(|stmt| format!("{stmt}")), ";".to_string()).collect())
 }

@@ -4,7 +4,7 @@ use crate::lang::constructs::{Statement, Param};
 use crate::parser::Parseable;
 
 impl Parseable for Statement {
-    fn parse(stmt: Pair<'_, Rule>) -> Statement {
+    fn parse(stmt: Pair<'_, Rule>) -> Option<Self> {
         let mut cvar = String::new();
         let mut params_res: Vec<Param> = Vec::new();
     
@@ -15,15 +15,16 @@ impl Parseable for Statement {
                     cvar = param.as_str().to_string();
                 }
                 Rule::param => {
-                    params_res.push(Param::parse(param.into_inner().next().unwrap()));
+                    let p = Param::parse(param);
+                    if let Some(p) = p { params_res.push(p) }
                 }
                 _ => (),
             }
         }
     
-        Statement {
+        Some(Statement {
             cvar: cvar,
             params: params_res,
-        }
+        })
     }
 }

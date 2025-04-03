@@ -24,6 +24,6 @@ pub fn parse(input: &str) -> Result<Pair<'_, Rule>> {
 }
 
 
-pub trait Parseable {
-    fn parse(rule: Pair<'_, Rule>) -> Self;
+pub trait Parseable where Self: Sized {
+    fn parse(rule: Pair<'_, Rule>) -> Option<Self>;
 }
