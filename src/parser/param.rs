@@ -5,17 +5,11 @@ use crate::parser::Parseable;
 
 impl Parseable for Param {
     fn parse(p: Pair<'_, Rule>) -> Option<Self> {
-        let p_inner = match p.into_inner().next() {
-            Some(e) => e,
-            None => return None
-        };
+        let p_inner = p.into_inner().next()?;
 
         Some(match p_inner.as_rule() {
             Rule::bool => {
-                let inner = match p_inner.as_str() {
-                    "true" => true,
-                    _ => false,
-                };
+                let inner = matches!(p_inner.as_str(), "true");
     
                 Param::Bool(inner)
             },

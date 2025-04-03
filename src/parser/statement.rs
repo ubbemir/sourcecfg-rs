@@ -23,7 +23,7 @@ impl Parseable for Statement {
         }
     
         Some(Statement {
-            cvar: cvar,
+            cvar,
             params: params_res,
         })
     }
