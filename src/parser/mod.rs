@@ -1,3 +1,7 @@
+mod config;
+mod statement;
+mod param;
+
 use pest::Parser;
 use pest::iterators::Pair;
 use pest_derive::Parser;
@@ -17,4 +21,9 @@ pub fn parse(input: &str) -> Result<Pair<'_, Rule>> {
         Some(e) => Ok(e),
         None => Err(Error::ParsingError("Unknown error".to_string())),
     }
+}
+
+
+pub trait Parseable {
+    fn parse(rule: Pair<'_, Rule>) -> Self;
 }
