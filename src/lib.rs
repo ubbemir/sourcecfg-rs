@@ -1,8 +1,10 @@
-pub mod error;
+mod error;
+pub use error::*;
+
 pub mod formatters;
 pub mod lang;
 
-use crate::error::Error as CrateErr;
+use crate::Error as CrateErr;
 use pest::Parser;
 use pest::iterators::Pair;
 use pest_derive::Parser;

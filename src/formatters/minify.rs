@@ -1,7 +1,7 @@
 use itertools::Itertools;
 
 use crate::lang::constructs::parse_config;
-use crate::error::Error;
+use crate::Error;
 
 
 pub fn minify(input: &str) -> Result<String, Error> {
