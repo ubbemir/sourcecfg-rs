@@ -1,6 +1,6 @@
 use core::fmt;
 
-use crate::Rule;
+use crate::parser::Rule;
 use pest::iterators::Pair;
 
 #[derive(Debug)]

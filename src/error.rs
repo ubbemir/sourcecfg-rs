@@ -4,6 +4,8 @@ pub enum Error {
     FormattingError(String)
 }
 
+pub type Result<T> = core::result::Result<T, Error>;
+
 impl std::fmt::Display for Error {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         match self {
