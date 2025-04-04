@@ -3,7 +3,7 @@ WS_N				= _{ WHITESPACE | NEWLINE }
 COMMENT				= ${ SingleLineComment }
 SingleLineComment 	= { "//" ~ (!"\n" ~ ANY)* }
 
-cvar_part	= @{ (ASCII_ALPHA_LOWER | ASCII_DIGIT )+ }
+cvar_part	= @{ (ASCII_ALPHANUMERIC | ASCII_DIGIT )+ }
 cvar		= @{("+" | "-")? ~ cvar_part ~ ("_" ~ cvar_part)* }
 
 param = { bool | number | cvar | string }
