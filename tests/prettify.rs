@@ -2,6 +2,7 @@ use sourcecfg_rs::formatters::prettify;
 
 use std::fs;
 use std::path::Path;
+use pretty_assertions::assert_eq;
 
 const TEST_CASES_PATH: &str = "tests/formatting_cases";
 
