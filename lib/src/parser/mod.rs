@@ -23,6 +23,17 @@ pub fn parse(input: &str) -> Result<Pair<'_, Rule>> {
     }
 }
 
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_parse_empty() {
+        let parsed = parse("");
+
+        assert!(parsed.is_ok(), "Expected parsing of empty string to return Ok(_) got {:?}", parsed);
+    }
+}
 
 pub trait Parseable where Self: Sized {
     fn parse(rule: Pair<'_, Rule>) -> Option<Self>;
