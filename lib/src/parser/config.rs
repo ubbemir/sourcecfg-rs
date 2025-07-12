@@ -15,7 +15,7 @@ impl Parseable for Config {
                 let filtered = stmts.into_inner().filter(|line| matches!(line.as_rule(), Rule::statement));
                 filtered.filter_map(|stmt| Statement::parse(stmt)).collect()
             },
-            _ => Vec::new()
+            _ => return None
         };
     
         Some(Config {
@@ -27,11 +27,11 @@ impl Parseable for Config {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::parser::parse;
+    use crate::parser::pest_parse;
 
     #[test]
     fn test_parseable_empty_stmts() {
-        let parsed = parse("").expect("TEST FAIL: Expected pest parsing to succeed");
+        let parsed = pest_parse("").expect("TEST FAIL: Expected pest parsing to succeed");
         let cfg = Config::parse(parsed);
 
         assert!(cfg.is_some(), "Expected parsing to return a valid Config struct. Got: {:?}", cfg);
