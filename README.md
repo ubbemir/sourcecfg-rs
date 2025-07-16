@@ -15,4 +15,18 @@ Options:
   -V, --version        Print version
 ```
 
-Examples of using the formatters from the library can be found in `lib/examples` or by examining the code for the CLI.
+## Library usage
+As of now the project is not on crates.io so to include it in your package you can add the dependency to Cargo.toml like this:
+```toml
+[dependencies]
+sourcecfg-rs = { git = "https://github.com/ubbemir/sourcecfg-rs" }
+```
+
+Example usage of a formatter:
+```rust
+use sourcecfg_rs::formatters;
+
+fn main() {
+    println!("{}", formatters::prettify("mp_restartgame 1; sv_cheats 0").unwrap());
+}
+```
