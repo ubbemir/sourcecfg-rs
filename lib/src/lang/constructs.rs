@@ -2,7 +2,7 @@ use core::fmt;
 
 #[derive(Debug)]
 pub struct Config {
-    pub statements: Vec<Statement>
+    pub statements: Vec<Statement>,
 }
 
 #[derive(Debug)]

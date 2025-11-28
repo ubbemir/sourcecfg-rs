@@ -1,13 +1,13 @@
 mod config;
-mod statement;
 mod param;
+mod statement;
 
 use pest::Parser;
 use pest::iterators::Pair;
 use pest_derive::Parser;
 
-use crate::{Result, Error};
 use crate::lang::constructs::Config;
+use crate::{Error, Result};
 
 #[derive(Parser)]
 #[grammar = "source_cfg.pest"]
@@ -29,7 +29,7 @@ pub fn parse(input: &str) -> Result<Config> {
 
     match Config::parse(pest_parsed) {
         Some(val) => Ok(val),
-        None => Err(Error::ParsingError("Failed to parse Config".to_string()))
+        None => Err(Error::ParsingError("Failed to parse Config".to_string())),
     }
 }
 
@@ -41,10 +41,17 @@ mod tests {
     fn test_parse_empty() {
         let parsed = pest_parse("");
 
-        assert!(parsed.is_ok(), "Expected parsing of empty string to return Ok(_) got {:?}", parsed);
+        assert!(
+            parsed.is_ok(),
+            "Expected parsing of empty string to return Ok(_) got {:?}",
+            parsed
+        );
     }
 }
 
-pub trait Parseable where Self: Sized {
+pub trait Parseable
+where
+    Self: Sized,
+{
     fn parse(rule: Pair<'_, Rule>) -> Option<Self>;
 }
