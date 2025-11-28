@@ -1,5 +1,5 @@
-mod prettify;
 mod minify;
+mod prettify;
 
-pub use prettify::*;
 pub use minify::*;
+pub use prettify::*;

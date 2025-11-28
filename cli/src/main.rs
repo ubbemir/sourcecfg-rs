@@ -1,7 +1,7 @@
-use sourcecfg_rs::formatters;
 use clap::Parser;
-use std::io::{self, Read};
+use sourcecfg_rs::formatters;
 use std::fs;
+use std::io::{self, Read};
 
 #[derive(Parser, Debug)]
 #[command(version, about, long_about = None)]
@@ -31,7 +31,6 @@ fn main() {
     let args = Args::parse();
 
     let content = read_content(&args, &mut io::stdin()).unwrap();
-    
 
     if args.minify {
         println!("{}", formatters::minify(&content).unwrap());
@@ -44,10 +43,10 @@ fn main() {
 mod tests {
     // Note this useful idiom: importing names from outer (for mod tests) scope.
     use super::*;
-    use tempfile::{tempdir, TempDir};
     use std::fs::File;
-    use std::io::{Write, Cursor};
+    use std::io::{Cursor, Write};
     use std::path::PathBuf;
+    use tempfile::{TempDir, tempdir};
 
     const FAKE_STDIN: &str = "Fake stdin input";
     const FAKE_FILECONTENT: &str = "Fake file content";
@@ -63,12 +62,19 @@ mod tests {
         let dir = tempdir().expect("TEST FAIL: Failed to create a temporary directory.");
 
         let file_path = dir.path().join("temp.cfg");
-        let mut file = File::create(&file_path).expect("TEST FAIL: Failed to create a temporary file.");
-        write!(file, "{}", FAKE_FILECONTENT).expect("TEST FAILED: Failed to write to temporary file.");
+        let mut file =
+            File::create(&file_path).expect("TEST FAIL: Failed to create a temporary file.");
+        write!(file, "{}", FAKE_FILECONTENT)
+            .expect("TEST FAILED: Failed to write to temporary file.");
 
         let fake_stdin_input = Cursor::new(FAKE_STDIN);
 
-        MockEnv { fake_stdin: fake_stdin_input, _temp_file: file, _temp_dir: dir, temp_file_path: file_path }
+        MockEnv {
+            fake_stdin: fake_stdin_input,
+            _temp_file: file,
+            _temp_dir: dir,
+            temp_file_path: file_path,
+        }
     }
 
     #[test]
@@ -81,7 +87,8 @@ mod tests {
             minify: false, // does not matter for this test case
         };
 
-        let content = read_content(&args, &mut mock_env.fake_stdin).expect("TEST FAIL: read_content failed");
+        let content =
+            read_content(&args, &mut mock_env.fake_stdin).expect("TEST FAIL: read_content failed");
         assert_eq!(content, FAKE_FILECONTENT);
         assert_ne!(content, FAKE_STDIN);
     }
@@ -95,7 +102,8 @@ mod tests {
             minify: false, // does not matter for this test case
         };
 
-        let content = read_content(&args, &mut mock_env.fake_stdin).expect("TEST FAIL: read_content failed");
+        let content =
+            read_content(&args, &mut mock_env.fake_stdin).expect("TEST FAIL: read_content failed");
         assert_eq!(content, FAKE_STDIN);
         assert_ne!(content, FAKE_FILECONTENT);
     }

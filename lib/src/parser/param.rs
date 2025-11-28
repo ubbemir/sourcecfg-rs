@@ -1,7 +1,7 @@
-use crate::parser::Rule;
-use pest::iterators::Pair;
 use crate::lang::constructs::Param;
 use crate::parser::Parseable;
+use crate::parser::Rule;
+use pest::iterators::Pair;
 
 impl Parseable for Param {
     fn parse(p: Pair<'_, Rule>) -> Option<Self> {
@@ -10,9 +10,9 @@ impl Parseable for Param {
         Some(match p_inner.as_rule() {
             Rule::bool => {
                 let inner = matches!(p_inner.as_str(), "true");
-    
+
                 Param::Bool(inner)
-            },
+            }
             Rule::number => {
                 let num_str = p_inner.as_str();
                 if let Ok(i) = num_str.parse::<i64>() {
@@ -22,7 +22,7 @@ impl Parseable for Param {
                 } else {
                     Param::String(num_str.to_string())
                 }
-            },
+            }
             Rule::cvar => Param::Cvar(p_inner.as_str().to_string()),
             _ => Param::String(p_inner.as_str().to_string()),
         })
