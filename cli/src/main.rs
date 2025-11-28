@@ -32,11 +32,13 @@ fn main() {
 
     let content = read_content(&args, &mut io::stdin()).unwrap();
 
-    if args.minify {
-        println!("{}", formatters::minify(&content).unwrap());
+    let output = if args.minify {
+        formatters::minify(&content).unwrap()
     } else {
-        println!("{}", formatters::prettify(&content).unwrap());
-    }
+        formatters::prettify(&content).unwrap()
+    };
+
+    println!("{}", output);
 }
 
 #[cfg(test)]
