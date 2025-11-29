@@ -33,6 +33,13 @@ pub fn parse(input: &str) -> Result<Config> {
     }
 }
 
+pub trait Parseable
+where
+    Self: Sized,
+{
+    fn parse(rule: Pair<'_, Rule>) -> Option<Self>;
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -47,11 +54,4 @@ mod tests {
             parsed
         );
     }
-}
-
-pub trait Parseable
-where
-    Self: Sized,
-{
-    fn parse(rule: Pair<'_, Rule>) -> Option<Self>;
 }

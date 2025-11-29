@@ -10,10 +10,9 @@ const TEST_CASES_PATH: &str = "tests/formatting_cases";
 fn run_all_test_cases() {
     let test_dir = Path::new(TEST_CASES_PATH);
 
-    for entry in fs::read_dir(test_dir).expect(&format!(
-        "Failed to read test cases dir '{}'",
-        TEST_CASES_PATH
-    )) {
+    for entry in fs::read_dir(test_dir)
+        .unwrap_or_else(|_| panic!("Failed to read test cases dir '{}'", TEST_CASES_PATH))
+    {
         let entry = entry.expect("Failed to read case dir");
         let path = entry.path();
         if path.is_dir() {
