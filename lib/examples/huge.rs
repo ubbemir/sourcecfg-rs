@@ -1,6 +1,6 @@
 use sourcecfg_rs::formatters;
 
-const REPEAT_AMOUNT: usize = 1_0_000;
+const REPEAT_AMOUNT: usize = 10_000;
 
 fn main() {
     let unparsed_file = include_str!("cfg/gamemode_casual.cfg");
