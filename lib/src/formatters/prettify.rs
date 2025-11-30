@@ -1,12 +1,10 @@
 use itertools::Itertools;
 
-use crate::Result;
+use crate::{Result, lang::constructs::Config};
 
-pub fn prettify(input: &str) -> Result<String> {
-    let cfg = crate::parser::parse(input)?;
-
+pub fn prettify(config: &Config) -> Result<String> {
     Ok(Itertools::intersperse(
-        cfg.statements.iter().map(|stmt| format!("{stmt}")),
+        config.statements.iter().map(|stmt| format!("{stmt}")),
         "\n".to_string(),
     )
     .collect())

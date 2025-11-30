@@ -32,10 +32,12 @@ fn main() {
 
     let content = read_content(&args, &mut io::stdin()).unwrap();
 
+    let config = sourcecfg_rs::parser::parse(&content).expect("Failed to parse CFG");
+
     let output = if args.minify {
-        formatters::minify(&content).unwrap()
+        formatters::minify(&config).unwrap()
     } else {
-        formatters::prettify(&content).unwrap()
+        formatters::prettify(&config).unwrap()
     };
 
     println!("{}", output);

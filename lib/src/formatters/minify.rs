@@ -1,12 +1,10 @@
 use itertools::Itertools;
 
-use crate::Result;
+use crate::{Result, lang::constructs::Config};
 
-pub fn minify(input: &str) -> Result<String> {
-    let cfg = crate::parser::parse(input)?;
-
+pub fn minify(config: &Config) -> Result<String> {
     Ok(Itertools::intersperse(
-        cfg.statements.iter().map(|stmt| format!("{stmt}")),
+        config.statements.iter().map(|stmt| format!("{stmt}")),
         ";".to_string(),
     )
     .collect())

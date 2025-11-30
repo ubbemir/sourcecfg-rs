@@ -1,6 +1,7 @@
 use sourcecfg_rs::formatters::prettify;
 
 use pretty_assertions::assert_eq;
+use sourcecfg_rs::parser;
 use std::fs;
 use std::path::Path;
 
@@ -36,7 +37,9 @@ fn run_all_test_cases() {
                 )
             });
 
-            let actual = prettify(&input).expect("Failed to run prettify");
+            let config = parser::parse(&input)
+                .unwrap_or_else(|_| panic!("Failed to parse input for case {}", case_name));
+            let actual = prettify(&config).expect("Failed to run prettify");
 
             assert_eq!(
                 actual, expected,
