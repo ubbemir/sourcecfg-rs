@@ -5,7 +5,7 @@ fn main() {
 
     let config = parser::parse(unparsed_file).expect("Failed to parse CFG");
 
-    println!("Minified:\n{}", formatters::minify(&config).unwrap());
+    println!("Minified:\n{}", formatters::minify(&config));
     println!();
-    println!("Prettified:\n{}", formatters::prettify(&config).unwrap());
+    println!("Prettified:\n{}", formatters::prettify(&config));
 }

@@ -35,9 +35,9 @@ fn main() {
     let config = sourcecfg_rs::parser::parse(&content).expect("Failed to parse CFG");
 
     let output = if args.minify {
-        formatters::minify(&config).unwrap()
+        formatters::minify(&config)
     } else {
-        formatters::prettify(&config).unwrap()
+        formatters::prettify(&config)
     };
 
     println!("{}", output);
