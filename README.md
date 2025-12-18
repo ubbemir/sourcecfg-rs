@@ -17,5 +17,5 @@ Example usage of a formatter:
 use sourcecfg_rs::{formatters, parser};
 
 let config = parser::parse("mp_restartgame 1; sv_cheats 0").expect("Failed to parse CFG");
-println!("{}", formatters::prettify(&config).unwrap());
+println!("{}", formatters::prettify(&config));
 ```

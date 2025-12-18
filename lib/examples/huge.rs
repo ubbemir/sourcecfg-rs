@@ -9,6 +9,6 @@ fn main() {
     let config = parser::parse(&unparsed_file).expect("Failed to parse CFG");
 
     println!("Prettifying data of size {} ...", unparsed_file.len());
-    let _ = formatters::prettify(&config).unwrap();
+    let _ = formatters::prettify(&config);
     println!("Done prettifying");
 }

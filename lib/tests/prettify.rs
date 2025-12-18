@@ -39,7 +39,7 @@ fn run_all_test_cases() {
 
             let config = parser::parse(&input)
                 .unwrap_or_else(|_| panic!("Failed to parse input for case {}", case_name));
-            let actual = prettify(&config).expect("Failed to run prettify");
+            let actual = prettify(&config);
 
             assert_eq!(
                 actual, expected,
