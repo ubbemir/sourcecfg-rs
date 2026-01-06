@@ -18,7 +18,7 @@ struct Args {
 fn read_content<T: Read>(args: &Args, stdin: &mut T) -> io::Result<String> {
     let content: String;
     if let Some(cfg_file) = &args.input {
-        content = fs::read_to_string(cfg_file)?;
+        content = fs::read_to_string(cfg_file);
     } else {
         let mut input = String::new();
         stdin.read_to_string(&mut input)?;
@@ -91,7 +91,7 @@ mod tests {
             minify: false, // does not matter for this test case
         };
 
-        let content = 
+        let content =
             read_content(&args, &mut mock_env.fake_stdin).expect("TEST FAIL: read_content failed");
         assert_eq!(content, FAKE_FILECONTENT);
         assert_ne!(content, FAKE_STDIN);
