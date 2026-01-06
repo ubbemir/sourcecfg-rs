@@ -91,7 +91,7 @@ mod tests {
             minify: false, // does not matter for this test case
         };
 
-        let content =
+        let content = 
             read_content(&args, &mut mock_env.fake_stdin).expect("TEST FAIL: read_content failed");
         assert_eq!(content, FAKE_FILECONTENT);
         assert_ne!(content, FAKE_STDIN);
