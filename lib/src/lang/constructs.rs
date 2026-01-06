@@ -35,7 +35,7 @@ impl fmt::Display for Param {
             Param::Bool(b) => write!(f, "{}", b),
             Param::Float(n) => write!(f, "{}", n),
             Param::Int(n) => write!(f, "{}", n),
-            Param::Cvar(s) | Param::String(s) => write!(f, "{}d", s),
+            Param::Cvar(s) | Param::String(s) => write!(f, "{}", s),
         }
     }
 }
