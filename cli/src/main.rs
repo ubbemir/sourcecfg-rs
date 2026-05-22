@@ -1,3 +1,4 @@
+use anyhow::Context;
 use clap::Parser;
 use sourcecfg_rs::formatters;
 use std::fs;
@@ -26,12 +27,12 @@ fn read_content<T: Read>(args: &Args, stdin: &mut T) -> io::Result<String> {
     }
 }
 
-fn main() {
+fn main() -> anyhow::Result<()> {
     let args = Args::parse();
 
-    let content = read_content(&args, &mut io::stdin()).unwrap();
+    let content = read_content(&args, &mut io::stdin()).with_context(|| "failed to read inputs")?;
 
-    let config = sourcecfg_rs::parser::parse(&content).expect("Failed to parse CFG");
+    let config = sourcecfg_rs::parser::parse(&content).with_context(|| "failed to parse CFG")?;
 
     let output = if args.minify {
         formatters::minify(&config)
@@ -40,6 +41,8 @@ fn main() {
     };
 
     println!("{}", output);
+
+    Ok(())
 }
 
 #[cfg(test)]
