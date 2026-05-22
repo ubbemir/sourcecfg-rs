@@ -9,4 +9,6 @@ clap = { version = "4.5.40", features = ["derive"] }
 sourcecfg-rs = { path = "../lib" }
 
 [dev-dependencies]
+insta = "1.47.2"
+insta-cmd = "0.6.0"
 tempfile = "3.20.0"
