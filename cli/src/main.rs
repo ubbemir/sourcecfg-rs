@@ -16,15 +16,13 @@ struct Args {
 }
 
 fn read_content<T: Read>(args: &Args, stdin: &mut T) -> io::Result<String> {
-    let content: String;
     if let Some(cfg_file) = &args.input {
-        content = fs::read_to_string(cfg_file)?;
+        Ok(fs::read_to_string(cfg_file)?)
     } else {
         let mut input = String::new();
         stdin.read_to_string(&mut input)?;
-        content = input;
+        Ok(input)
     }
-    Ok(content)
 }
 
 fn main() {
