@@ -2,13 +2,14 @@ use clap::Parser;
 use sourcecfg_rs::formatters;
 use std::fs;
 use std::io::{self, Read};
+use std::path::PathBuf;
 
 #[derive(Parser, Debug)]
 #[command(version, about, long_about = None)]
 struct Args {
     /// Read CFG from a file instead of stdin
     #[arg(short, long)]
-    input: Option<String>,
+    input: Option<PathBuf>,
 
     /// Minify instead of prettifying
     #[arg(short, long)]
