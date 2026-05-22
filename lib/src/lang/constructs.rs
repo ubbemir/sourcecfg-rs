@@ -14,8 +14,8 @@ pub struct Statement {
 impl fmt::Display for Statement {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(f, "{}", self.cvar)?;
-        for param in self.params.iter() {
-            write!(f, " {}", param)?;
+        for param in &self.params {
+            write!(f, " {param}")?;
         }
         Ok(())
     }
@@ -32,10 +32,10 @@ pub enum Param {
 impl fmt::Display for Param {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
-            Param::Bool(b) => write!(f, "{}", b),
-            Param::Float(n) => write!(f, "{}", n),
-            Param::Int(n) => write!(f, "{}", n),
-            Param::Cvar(s) | Param::String(s) => write!(f, "{}", s),
+            Param::Bool(b) => write!(f, "{b}"),
+            Param::Float(n) => write!(f, "{n}"),
+            Param::Int(n) => write!(f, "{n}"),
+            Param::Cvar(s) | Param::String(s) => write!(f, "{s}"),
         }
     }
 }

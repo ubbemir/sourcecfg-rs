@@ -40,7 +40,7 @@ fn main() -> anyhow::Result<()> {
         formatters::prettify(&config)
     };
 
-    println!("{}", output);
+    println!("{output}");
 
     Ok(())
 }

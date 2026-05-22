@@ -17,7 +17,7 @@ impl Parseable for Statement {
                 Rule::param => {
                     let p = Param::parse(param);
                     if let Some(p) = p {
-                        params_res.push(p)
+                        params_res.push(p);
                     }
                 }
                 _ => (),
