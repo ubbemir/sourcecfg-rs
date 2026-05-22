@@ -5,13 +5,10 @@ use pest::iterators::Pair;
 
 impl Parseable for Config {
     fn parse(cfg: Pair<'_, Rule>) -> Option<Self> {
-        let stmts = match cfg.into_inner().next() {
-            Some(val) => val,
-            None => {
-                return Some(Config {
-                    statements: Vec::new(),
-                });
-            }
+        let Some(stmts) = cfg.into_inner().next() else {
+            return Some(Config {
+                statements: Vec::new(),
+            });
         };
 
         let stmts_res = match stmts.as_rule() {
