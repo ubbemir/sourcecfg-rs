@@ -54,8 +54,7 @@ mod tests {
 
         assert!(
             parsed.is_ok(),
-            "Expected parsing of empty string to return Ok(_) got {:?}",
-            parsed
+            "Expected parsing of empty string to return Ok(_) got {parsed:?}",
         );
     }
 }
