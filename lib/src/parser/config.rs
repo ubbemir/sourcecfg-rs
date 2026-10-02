@@ -39,8 +39,7 @@ mod tests {
 
         assert!(
             cfg.is_some(),
-            "Expected parsing to return a valid Config struct. Got: {:?}",
-            cfg
+            "Expected parsing to return a valid Config struct. Got: {cfg:?}",
         );
 
         let cfg = cfg.unwrap();

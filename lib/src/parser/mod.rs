@@ -24,6 +24,10 @@ fn pest_parse(input: &str) -> Result<Pair<'_, Rule>> {
     }
 }
 
+/// Parses `input` and returns a [Config] on success.
+/// # Errors
+///
+/// Will return an `Err` if `input` fails to parse.
 pub fn parse(input: &str) -> Result<Config> {
     let pest_parsed = pest_parse(input)?;
 
@@ -50,8 +54,7 @@ mod tests {
 
         assert!(
             parsed.is_ok(),
-            "Expected parsing of empty string to return Ok(_) got {:?}",
-            parsed
+            "Expected parsing of empty string to return Ok(_) got {parsed:?}",
         );
     }
 }
